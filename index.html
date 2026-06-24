@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PENTHA Academy — Placement Test</title>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; background: #ffffff; }
+    #exam { border: 0; width: 100%; height: 100%; display: block; }
+  </style>
+</head>
+<body>
+  <!-- Full-screen frame of the PENTHA placement exam (served by Google Apps Script).
+       The exam, grading, and results-in-Google-Drive all run on the script;
+       this page just gives it a clean GitHub Pages address. -->
+  <iframe id="exam" title="PENTHA Academy Placement Test" allow="clipboard-write"></iframe>
+  <script>
+    // The deployed Apps Script web app (/exec). If you ever redeploy to a NEW
+    // deployment with a different URL, update this one line.
+    var EXAM_URL = "https://script.google.com/macros/s/AKfycbzPa9yyxcii-mAhNrk6-YoA-Iu3yomp1CH7w_GW56zARYatFMS6f3yr-xJeXURWxne31Q/exec";
+
+    // Forward any query string (e.g. ?name=Maria%20Lopez&token=ABC123) to the exam,
+    // so personalized candidate links keep working through this wrapper.
+    document.getElementById("exam").src = EXAM_URL + (window.location.search || "");
+  </script>
+</body>
+</html>
