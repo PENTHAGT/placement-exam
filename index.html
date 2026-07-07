@@ -292,7 +292,15 @@ function loadData(){
 
 function onData(data){
   STATE.data = data;
-  document.getElementById('examTitle').textContent   = data.examTitle;
+  document.getElementById('examTitle').textContent = (data && data.examTitle) || '';
+  if(data && data.closed){
+    var w = document.getElementById('s-welcome');
+    if(w){ w.innerHTML =
+      '<div class="eyebrow" style="text-align:center">Placement test</div>'
+      + '<h2 class="section-h" style="text-align:center">Not open right now</h2>'
+      + '<p class="lead" style="text-align:center;max-width:48ch;margin:14px auto 0">This placement test is not open at the moment. Please check with your evaluator \u2014 they will open it for your session.</p>'; }
+    return;
+  }
   document.getElementById('minsHint').textContent    = data.writtenMins;
   BOOT.mins = data.writtenMins || BOOT.mins;
   STATE.total = (data.grammar.length + data.reading.length);
@@ -453,6 +461,7 @@ function doSubmit(auto){
 function onResult(r){
   // Candidate sees only a completion message; scores are saved server-side (sheet + examiner email).
   document.getElementById('bar').classList.remove('show');
+  if(r && r.closed){ showError('The test is closed, so your answers were not saved. Please contact your evaluator.'); return; }
   show('s-result');
 }
 
